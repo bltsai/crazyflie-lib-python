@@ -55,24 +55,14 @@ if __name__ == '__main__':
         time.sleep(2)
 
         for y in range(10):
-            cf.commander.send_hover_setpoint(0, 0, 0, y / 25)
+            cf.commander.send_hover_setpoint(0, 0, 0, y / 25.0)
             time.sleep(0.1)
 
         for _ in range(20):
             cf.commander.send_hover_setpoint(0, 0, 0, 0.4)
             time.sleep(0.1)
 
-        for _ in range(50):
-            cf.commander.send_hover_setpoint(0.5, 0, 36 * 2, 0.4)
-            time.sleep(0.1)
 
-        for _ in range(50):
-            cf.commander.send_hover_setpoint(0.5, 0, -36 * 2, 0.4)
-            time.sleep(0.1)
-
-        for _ in range(20):
-            cf.commander.send_hover_setpoint(0, 0, 0, 0.4)
-            time.sleep(0.1)
 
         for y in range(50):
             cf.commander.send_hover_setpoint(0, 0, 0, (50 - y) / 125)

@@ -36,7 +36,7 @@ import time
 import cflib.crtp
 from cflib.crazyflie.syncCrazyflie import SyncCrazyflie
 
-URI = 'radio://0/80/250K'
+URI = 'radio://0/80/2M'
 
 # Only output errors from the logging framework
 logging.basicConfig(level=logging.ERROR)
@@ -54,28 +54,21 @@ if __name__ == '__main__':
         cf.param.set_value('kalman.resetEstimation', '0')
         time.sleep(2)
 
-        for y in range(10):
+        for y in range(40):
+            # cf.commander.send_zdistance_setpoint(0, 0, 0, y / 25)
             cf.commander.send_hover_setpoint(0, 0, 0, y / 25)
             time.sleep(0.1)
 
         for _ in range(20):
-            cf.commander.send_hover_setpoint(0, 0, 0, 0.4)
-            time.sleep(0.1)
-
-        for _ in range(50):
-            cf.commander.send_hover_setpoint(0.5, 0, 36 * 2, 0.4)
-            time.sleep(0.1)
-
-        for _ in range(50):
-            cf.commander.send_hover_setpoint(0.5, 0, -36 * 2, 0.4)
+            cf.commander.send_hover_setpoint(0, 0, 0, 1.6)
             time.sleep(0.1)
 
         for _ in range(20):
-            cf.commander.send_hover_setpoint(0, 0, 0, 0.4)
+            cf.commander.send_hover_setpoint(0, -1, 0, 1.6)
             time.sleep(0.1)
 
-        for y in range(50):
-            cf.commander.send_hover_setpoint(0, 0, 0, (50 - y) / 125)
-            time.sleep(0.1)
+        for y in range(160):
+            cf.commander.send_hover_setpoint(0, 0, 0, (160 - y) / 100)
+            time.sleep(0.05)
 
         cf.commander.send_stop_setpoint()
